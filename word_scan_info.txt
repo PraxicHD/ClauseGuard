@@ -1,0 +1,22 @@
+re.finditer()
+ - This is the most crucial function for your use case. Unlike functions that just return a list of text strings, this function yields iterator objects containing structural data about every match.
+
+.start()
+.end()
+.group()
+- These give you the exact character offsets in the document and the exact string that triggered the flag
+
+re.escape()
+- If your flagged phrases contain characters like hyphens, parentheses, or periods, you must run them through this function before building your search pattern so Python treats them as literal text instead of regex commands.
+
+
+
+Step 1: Normalize the key words, store them in a dictionary (keys are the words being scanned for in lowercase, the value being the warning it displays).
+Step 2: Construct a single pattern by combining all the phrases into a single expression using pipe | OR operator.
+Step 3: Enforce boundaries by wrapping the combined patter into \b anchors (this prevents a phrase like "fee" from accidentally triggering a flag instead of "coffee").
+Step 4: Pass re.IGNORECASE to ignore capital letters so it is all treated as a uniform style
+Step 5: Loop through the match iterations, take the text, convert to lowercase, and use that as the key to look up the specific warning from the dictionary. 
+
+Handling UI Output:
+Because re.finditer() provides index ranges, you can easily use those character positions to slice the string later.
+For example, you can insert HTML markup (like <mark> tags) or markdown elements directly at those specific start and end indices to draw the user's attention to the exact sentence.

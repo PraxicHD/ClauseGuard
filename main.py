@@ -1,3 +1,5 @@
+import sys
+
 def main():
     return main_menu()
 
@@ -26,8 +28,12 @@ def main_menu():
 def scan():
     print("Please paste in the TOS or Contract you would like to scan")
             
-    scan_text = input()
+    scan_text = sys.stdin.read()
     
+    scanning = True
+    
+    while scanning:
+        pass
     print("Scanning...")
     return main_menu()
 
